@@ -3,12 +3,12 @@ BioChemFOAM
 
 <b>BioChemFOAM</b> is a CFD model developed initially in OpenFOAM 2.3.1(OF231) which solves a couple system of partial differential equations (PDE). The methodology allows coupling of hydrodynamic and biochemical processes in aquatic ecosystems. 
 <br>
-<b>BioChemFOAM</b> utilizes mainly an splitting-operator technique in OF to solve the coupling system of non-linear equations for the biochemical processes (e.g. concentration of nitrate, concentration of phosphorus, concentration of algae, etc). 
 <br>
-More information can be found in the PhD dissertation <b><sup>[R01]</sup></b> and in the Journal publication <b><sup>[R02]</sup></b>. 
+<b>BioChemFOAM</b> utilizes mainly an splitting-operator technique in OF to solve the coupling system of non-linear equations for the biochemical processes (e.g. concentration of nitrate, concentration of phosphorus, concentration of algae, etc). It maybe also possible to applied to other research areas (e.g. blood flow and reactions). More information can be found in the PhD dissertation <b><sup>[R01]</sup></b> and in the Journal publication <b><sup>[R02]</sup></b>. 
 <br>
-The code and examples presented here serves as a basis to include different parameterization and to extend its capabilities by utilizing e.g. other hydrodynamic models, turbulence, available in OpenFOAM(OF).<br>
-
+<br>
+The code and examples presented here serves as a basis to include different parameterization and to extend its capabilities by utilizing e.g. other hydrodynamic models, turbulence, available in OpenFOAM(OF).
+The code can be found here in e.g. `BioChemFOAM/src_oh_of41/cavityB0102/BioChemFOAM41_B0102/`. This organization of folders is selected since you can customize the solver according to your needs, e.g. number of coupled species transport equations, for each application, e.g. `BioChemFOAM/src_oh_of41/cavityB0102/` cavity with pisoFOAM and custom species transport.
 
 ---
 
