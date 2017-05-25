@@ -1,0 +1,98 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  4.1                                   |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      fvSchemes;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+ddtSchemes
+{
+    default         Euler;
+}
+
+gradSchemes
+{
+    default         Gauss linear;
+}
+
+divSchemes
+{
+    default         none;
+    div(phi,U)      Gauss limitedLinearV 1;
+    div(phi,k)      Gauss limitedLinear 1;
+    div(phi,epsilon) Gauss limitedLinear 1;
+    div(phi,omega)  Gauss limitedLinear 1;
+    div(phi,R)      Gauss limitedLinear 1;
+    div(R)          Gauss linear;
+    div(phi,nuTilda) Gauss limitedLinear 1;
+    div((nuEff*dev2(T(grad(U))))) Gauss linear;
+
+    //------------------------------------
+    div(phi,Ci)     Gauss limitedLinear 1;
+    div(phi,Ci2)     Gauss limitedLinear 1;
+    div(phi,Ci3)     Gauss limitedLinear 1;
+    div(phi,Ci4)     Gauss limitedLinear 1;
+    div(phi,Ci5)     Gauss limitedLinear 1;
+    div(phi,Ci6)     Gauss limitedLinear 1;
+    div(phi,Ci7)     Gauss limitedLinear 1;
+    div(phi,Ci8)     Gauss limitedLinear 1;
+    div(phi,Ci9)     Gauss limitedLinear 1;
+    div(phi,Ci10)     Gauss limitedLinear 1;
+    div(phi,Ci11)     Gauss limitedLinear 1;
+
+    div(phiVs,Ci)     Gauss limitedLinear 1;
+    div(phiVs,Ci9)     Gauss limitedLinear 1;
+    div(phiVs,Ci10)     Gauss limitedLinear 1;
+    div(phiVs,Ci11)     Gauss limitedLinear 1;
+
+    div(phi,T)     Gauss limitedLinear 1;
+    //------------------------------------
+}
+
+laplacianSchemes
+{
+    default         Gauss linear corrected;
+
+    //------------------------------------
+    laplacian(nut,Ci) Gauss linear limited 0.5;
+    laplacian(nut,Ci2) Gauss linear limited 0.5;
+    laplacian(nut,Ci3) Gauss linear limited 0.5;
+    laplacian(nut,Ci4) Gauss linear limited 0.5;
+    laplacian(nut,Ci5) Gauss linear limited 0.5;
+    laplacian(nut,Ci6) Gauss linear limited 0.5;
+    laplacian(nut,Ci7) Gauss linear limited 0.5;
+    laplacian(nut,Ci8) Gauss linear limited 0.5;
+    laplacian(nut,Ci9) Gauss linear limited 0.5;
+    laplacian(nut,Ci10) Gauss linear limited 0.5;
+    laplacian(nut,Ci11) Gauss linear limited 0.5;
+    
+    laplacian(nut,T) Gauss linear limited 1.0;
+
+    laplacian(DT,T) Gauss linear limited 0.5;
+
+    laplacian(DD_I,I) Gauss linear limited 1.0;
+    //------------------------------------
+}
+
+interpolationSchemes
+{
+    default         linear;
+}
+
+snGradSchemes
+{
+    default         corrected;
+}
+
+
+// ************************************************************************* //

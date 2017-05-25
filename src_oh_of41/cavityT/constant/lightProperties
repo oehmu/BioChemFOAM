@@ -1,0 +1,23 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.1.1                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      lightProperties;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+nI            nI           [0 0 0 0 0 0 0]  (0 0 1);//not used yet
+ki			  ki           [0 0 -1 0 0 0 0]  1;			
+D_I 		  D_I			[0 2 -1 0 0 0 0] 1;//assumed so far
+//Bxmin is hard coded
+//Is is hard coded 100-400 ly/day (Chapra 1997) page 611
+//Saturation light intensity, Is, for Green Algae, 65-160 ly/day (Cerco, 1994) Tale 6-8
+//Saturation light intensity, Is, for Blue-Green, 43-600 ly/day (Cerco, 1994) Tale 6-8

@@ -1,0 +1,178 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  4.1                                   |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      fvSolution;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+solvers
+{
+    p
+    {
+        solver          GAMG;
+        tolerance       1e-06;
+        relTol          0.1;
+        smoother        GaussSeidel;
+    }
+
+    pFinal
+    {
+        $p;
+        tolerance       1e-06;
+        relTol          0;
+    }
+
+    "(U|k|epsilon|omega|R|nuTilda)"
+    {
+        solver          smoothSolver;
+        smoother        GaussSeidel;
+        tolerance       1e-05;
+        relTol          0;
+    }
+//--------
+    Ci
+    {
+        solver           PBiCG;
+        preconditioner   DILU;
+        //  minIter     0;
+        //          maxIter     500;
+       tolerance        1e-08;
+        relTol           0;
+    };
+    Ci2
+    {
+        solver           PBiCG;
+        preconditioner   DILU;
+        minIter     0;
+        maxIter     500;
+        tolerance        1e-05;
+        relTol           0;
+    };
+    Ci3
+    {
+        solver           PBiCG;
+        preconditioner   DILU;
+        minIter     0;
+        maxIter     500;
+        tolerance        1e-05;
+        relTol           0;
+    };
+    Ci4
+    {
+        solver           PBiCG;
+        preconditioner   DILU;
+        minIter     0;
+        maxIter     500;
+        tolerance        1e-05;
+        relTol           0;
+    };
+    Ci5
+    {
+        solver           PBiCG;
+        preconditioner   DILU;
+        minIter     0;
+        maxIter     500;
+        tolerance        1e-05;
+        relTol           0;
+    };
+    Ci6
+    {
+        solver           PBiCG;
+        preconditioner   DILU;
+        minIter     0;
+        maxIter     500;
+        tolerance        1e-05;
+        relTol           0;
+    };
+    Ci7
+    {
+        solver           PBiCG;
+        preconditioner   DILU;
+        minIter     0;
+        maxIter     500;
+        tolerance        1e-05;
+        relTol           0;
+    };
+    Ci8
+    {
+        solver           PBiCG;
+        preconditioner   DILU;
+        minIter     0;
+        maxIter     500;
+        tolerance        1e-05;
+        relTol           0;
+    };
+    Ci9
+    {
+        solver           PBiCG;
+        preconditioner   DILU;
+        minIter     0;
+        maxIter     700;
+        tolerance        1e-05;
+        relTol           0;
+    };
+    Ci10
+    {
+        solver           PBiCG;
+        preconditioner   DILU;
+        minIter     0;
+        maxIter     500;
+        tolerance        1e-05;
+        relTol           0;
+    };
+    Ci11
+    {
+        solver           PBiCG;
+        preconditioner   DILU;
+        minIter     0;
+        maxIter     500;
+        tolerance        1e-05;
+        relTol           0;
+    };
+    
+    T{
+        solver           PBiCG;
+        preconditioner   DILU;
+        minIter     0;
+        maxIter     500;
+        tolerance        1e-05;
+        relTol           0;
+    };
+    
+    I
+    {
+        solver           PCG;//GAMG, ICCG, PCG, smoothSolver
+        preconditioner   DIC;//FDIC//options for symmetric matrix are: DIC, FDIC, GAMG, diagonal, none
+        //  minIter     0;
+        //          maxIter     500;
+        tolerance        1e-05;
+        relTol           0;
+    };
+
+
+//---------
+
+
+
+}
+
+PISO
+{
+    nCorrectors     2;
+    nNonOrthogonalCorrectors 0;
+    pRefCell        0;
+    pRefValue       0;
+}
+
+
+// ************************************************************************* //

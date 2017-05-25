@@ -1,0 +1,388 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  1.7.1                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "constant";
+    object      transportProperties;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+transportModel  Newtonian;
+
+nu              	nu 		[ 0 2 -1 0 0 0 0 ] 1.0e-06;
+rho			rho 		[1 -3 0 0 0 0 0] 1000;
+CrossPowerLawCoeffs
+{
+    nu0             	nu0 		[ 0 2 -1 0 0 0 0 ] 1e-06;
+    nuInf           	nuInf 		[ 0 2 -1 0 0 0 0 ] 1e-06;
+    m               	m 		[ 0 0 1 0 0 0 0 ] 1;
+    n               	n 		[ 0 0 0 0 0 0 0 ] 1;
+}
+
+BirdCarreauCoeffs
+{
+    nu0             	nu0 		[ 0 2 -1 0 0 0 0 ] 1e-06;
+    nuInf           	nuInf 		[ 0 2 -1 0 0 0 0 ] 1e-06;
+    k               	k 		[ 0 0 1 0 0 0 0 ] 0;
+    n               	n 		[ 0 0 0 0 0 0 0 ] 1;
+}
+//Diffusion coefficients for mass transport in water, pag41 Martin Book 
+//"Hydrodynamics and Transport for Water Quality"
+Dim 				Dim			[0 2 -1 0 0 0 0] 1e-9;//page 57 Schnoor book, Molecular Diffusion
+Dim2   				Dim2 		[0 2 -1 0 0 0 0] 0.00028;
+Dim3              	Dim3 		[0 2 -1 0 0 0 0] 0.00028;
+Dim4              	Dim4 		[0 2 -1 0 0 0 0] 0.00028;
+Dim5              	Dim5 		[0 2 -1 0 0 0 0] 0.00028;
+Dim6              	Dim6 		[0 2 -1 0 0 0 0] 0.00028;
+Dim7              	Dim7 		[0 2 -1 0 0 0 0] 0.00028;
+Dim8              	Dim8 		[0 2 -1 0 0 0 0] 0.00028;
+Dim9              	Dim9 		[0 2 -1 0 0 0 0] 0.00028;
+Dim10              	Dim10 		[0 2 -1 0 0 0 0] 0.00028;
+Dim11              	Dim11 		[0 2 -1 0 0 0 0] 0.00028;
+
+DT              	DT 			[0 2 -1 0 0 0 0] 0.00028;
+
+//------------------------------------------------------------------------------------
+//Production rate of algal group x [day^-1] calculated in PDEs
+Px              	Px 		[0 0 -1 0 0 0 0] 1.15741e-05;
+
+//Maximum growth rate for algal group x [day^-1] 
+//Typical values 2.5 day^-1 (value for Greens algae type), (Cerco, 1994) Table 9-1 //
+PMx              	PMx 		[0 0 -1 0 0 0 0] 2.89352e-05;//2.5/(24*60*60) to have it in 1/seconds
+
+//Nitrogen half saturation constant for algal group x [mass/volume]
+// Green algae min-..-max (0.001-0.005,0.035,0.15-1.236), (Bowie, 1985) Table 6-10
+// Blue green algae (0-0.001,0.0025,0.015,0.06-4.34), (Bowie, 1985) Table 6-10
+KHNx			KHNx		[0 0 0 0 0 0 0] 0.1;
+
+//Phosphorus half saturation constant for algal group x [mass/volume]
+// Green algae (0.004-0.0025,0.005,0.01,0.03-0.475), (Bowie, 1985) Table 6-10
+//Blue-gree algae (0.0025-0.01,0.02,0.01,0.015-0.06), (Bowie, 1985) Table 6-10
+KHPx			KHPx		[0 0 0 0 0 0 0] 0.004;
+
+//TM1x: lower end of optimal temperature range for algal growth for algal group x (oC)
+//It is hard coded.
+//ref??? 15 oC
+
+//TM2x: lower end of optimal temperature range for algal growth for algal group x (oC)
+//It is hard coded.
+//ref??? 20 oC
+
+//KTG1x:effect of temperature below TM1x, on growth of algae group x
+//Greens, 0.008 oC^-2, (Cerco, 1994) Table 9-2
+
+//KTG2x:effect of temperature above TM2x, on growth of algae group x
+//Greens, 0.01 oC^-2, (Cerco, 1994) Table 9-2
+
+
+//------------------------------------------------------------------------------------								
+
+//Basal metabolism rate of algal group x(day^-1), calculated in PDEs
+//BMx             	BMx 		[0 0 -1 0 0 0 0] 0.30;//
+
+//Basal metabolism rate at TRx for algal group x (1/time) (respiration+excretion)
+//0.03-0.09 day^-1, (Cerco, 1994) Table 9-2
+//0.02-0.36 day^-1, (Cerco, 1994) Table 9-2
+//0.01 day^-1, for Greens (Cerco, 1994) Table 9-2
+BMRx             	BMRx 		[0 0 -1 0 0 0 0] 3.47222e-06;//0.3/(24*60*60) 1/sec
+
+//Effect of temperature on metabolism for algal group x (oC^-1)
+//0.069 oC^-1, (cerco, 1994) Table 9-2
+KTBx             	KTBx 		[0 0 0 0 0 0 0] 0.069;//
+//------------------------------------------------------------------------------------								
+
+//Predation rate of algal group x (day^-1)
+//0.215, for Greens (Cole, 1994) Table 9-3, here we have PRRx=PRx
+//PRx             	PRx 		[0 0 -1 0 0 0 0] 0.215;//
+PRRx             	PRRx 		[0 0 -1 0 0 0 0] 2.48843e-06;//0.215/(24*60*60) 1/sec
+
+//exponental dependence factor
+alphap			alphap		[0 0 0 0 0 0 0] 0.01;//1
+
+//reference algal concentration for predation (g C/m3)
+BxP			BxP		[0 0 0 0 0 0 0] 0.05;//0.5
+//------------------------------------------------------------------------------------								
+
+//A constant for algal group x
+//Does not have a physical fundamental but was there so I leve it
+FCDx            	FCDx 		[0 0 0 0 0 0 0] 0.0;//
+
+//Half saturation constant of DO for algal DOC excretion for group x (g-O2/m3)
+//its located in the denominator so units must be same as for concentration
+//0.5, (Cerco, 1994) Table 9-21
+KHRx            	KHRx 		[0 0 0 0 0 0 0] 0.5;
+
+//Fraction of predated carbon produced as dissolved organic carbon (1)
+//0.1, (Cerco, 1994) table 9-13
+//but is contrained 1-FCLP=1-0.55 or a value less than this is ok
+FCDP            	FCDP 		[0 0 0 0 0 0 0] 0.45;//
+
+//Heterotrophic respiration rate of dissolved organic carbon (day^-1)
+KHR             	KHR 		[0 0 -1 0 0 0 0] 3.47222e-06;//0.3/(24*60*60) 1/sec
+
+//Oxic respiration half saturation constant for DO (g-O2/m3)
+//0.5, (Cerco, 1994) table 9-16
+KHORDO			KHORDO		[0 0 0 0 0 0 0] 0.50;//min= - max=			//OK UNITS
+
+//Minimum respiration rate of DOC (day^-1)
+//0.01, (Cerco, 1994) table 9-16
+//min=0.01 - max=   		//OK UNITS
+KDC			KDC		[0 0 -1 0 0 0 0] 1.15741e-07;//0.01/(24*60*60) 1/sec
+
+//Constant that relates dissolution of labile particulate organic carbon (day^-1/g-C/m^3)
+//0.0, (Cerco, 1994) table 9-16
+//min=0.00 - max=0.0   		//OK UNITS
+KDCalg			KDCalg		[0 0 -1 0 0 0 0] 0.00;//has to be in 1/sec ojo when looking in literature
+
+//Effect of temperature on mineralization of dissolved organic matter (oC^-1)
+//0.069, (Cerco, 1994) table 9-16
+//min=0.00 - max=0.0   		
+//OK UNITS but later may have units of temperature C. Ojo  K as default in OpenFOAM
+KTMNL			KTMNL		[0 0 0 0 0 0 0] 0.069;
+
+//Reference temperature for mineralization of dissolved organic matter (oC)
+//20, (Cerco, 1994) table 9-16
+//min=20 - max=0.0   		
+//OK UNITS but later may have units of temperature C. Ojo  K as default in OpenFOAM
+TRMNL			TRMNL		[0 0 0 0 0 0 0] 20.0;
+
+
+//denitrification half saturation constant for nitrate (g-N/m3)
+//0.1, (Cerco, 1994) table 9-16
+//min=0.1*12/14??why?? - max=   	//OK UNITS
+KHDNN			KHDNN		[0 0 0 0 0 0 0] 0.01;
+
+//Ratio of denitrification rate to oxic dissolved organic carbon respiration rate
+//0.5, (Cerco, 1994) table 9-16
+//min=0.5 - max=0.5		//ADIMENSIONAL
+AANOX			AANOX		[0 0 0 0 0 0 0] 0.50;
+
+// Mean phosphorus/carbon ration in all algal groups (g-P/g-C)
+//depents on PCprm1,PCprm2, PCprm3, PO4t, APC*Bx
+// 1/PCprm1=1/42 (Cerco, 1994) table 9-5, this is the maximum\
+// since we do not include the additional term, influence of PO4d or PO4t and algae, see equ 5.4.13 Ji
+// or equation 4-51 (Cerco, 1994), pdf=GetTRDoc.pdf
+APC             	APC 		[0 0 0 0 0 0 0] 0.023809524;//
+
+// Fraction of predated phosphorus produced as LPOP
+// 0.2, (Cerco, 1994) table 9-15
+//FPLP=FPP
+FPP			FPP		[0 0 0 0 0 0 0] 0.35;//min=? - max=?   
+
+// Minimum hydrolysis rate of labile particulate organic phosphorus (day^-1)
+//KP=KLP
+// 0.075 day^-1 (Cerco, 1994) table 9-16
+KP			KP		[0 0 -1 0 0 0 0] 8.68056e-07;//min=? - max=? 0.075/(24*60*60) 1/sec   		
+
+// Constant that relate the hydrolysis of labile particulate organic phosphorus to 
+//algal biomass (day^-1 / g-C/m3)
+//KPalg=KLPalg
+//0.0, (Cerco, 1994) table 9-16
+KPalg			KPalg		[0 0 -1 0 0 0 0] 8.68056e-07;//min=? - max=?   //0 0.075/(24*60*60) 1/sec   			
+
+// Fraction of metabolized phosphorus by algal group x produced as DOP (1)
+// 1.0, (Cerco, 1994) Table 9-15
+FPDx             	FPDx 		[0 0 0 0 0 0 0] 0.5;//1.0
+
+// Fraction of predated phosphorus produced as DOP (1)
+// 0.5, (Cerco, 1994) table 9-15
+FPDP             	FPDP 		[0 0 0 0 0 0 0] 0.65;//
+
+// Minimum mineralization rate of dissolved organic phosphorus (day^-1)
+//KDP
+// 0.1 day^-1 (Cerco, 1994) table 9-16
+//min=? - max=?   
+KDP			KDP		[0 0 -1 0 0 0 0] 1.15741e-06;// 0.1/(24*60*60)
+
+// Constant that relate mineralization to algal biomass (day^-1 / g-C/m3)
+//KDPalg
+//0.2, (Cerco, 1994) table 9-16
+KDPalg			KDPalg		[0 0 -1 0 0 0 0] 2.31481e-06;//min=? - max=? //0.2/ (24*60*60)
+
+//NItrogen/carbon ration in algae group x (g-N/g-C)
+//0.167, (Cerco, 1994) table 9-5
+ANCx             	ANCx 		[0 0 0 0 0 0 0] 0.167;//
+
+Denit             	Denit 		[0 0 -1 0 0 0 0] 3.47222e-06;//0.3/(24*60*60)
+
+
+
+KDOP             	KDOP 		[0 0 -1 0 0 0 0] 3.47222e-06;//0.3/(24*60*60)
+
+//fraction of metabolized nitrogen by algal group x produced
+//as dissolved organi
+FNDx             	FNDx 		[0 0 0 0 0 0 0] 0.3;//
+FNDP             	FNDP 		[0 0 0 0 0 0 0] 0.3;//
+
+KDON             	KDON 		[0 0 -1 0 0 0 0] 3.47222e-06;//0.3/(24*60*60)
+
+//Fraction of metabolized nitrogen by algal group x produced as inorganic nitrogen
+//0.0, Cerco, 1994 Table 9-15
+FNIx             	FNIx 		[0 0 0 0 0 0 0] 0.1;//
+
+//fraction of predated nitrogen produced as inorganic nitrogen
+//0.0, Cerco, 1994 Table 9-15
+FNIP             	FNIP 		[0 0 0 0 0 0 0] 0.15;//
+
+//Preference for ammonium uptake by algal group x (between 0-1)
+//??
+//calculated with a formula or can be fixed
+PNx             	PNx 		[0 0 0 0 0 0 0] 0.5;//
+
+Nit             	Nit 		[0 0 -1 0 0 0 0] 3.47222e-06;//0.3/(24*60*60)
+
+//Mass of nitrate nitrogen reduced per mass of dissolved organic carbon oxidized
+//0.933g-N/g-C
+ANDC             	ANDC 		[0 0 0 0 0 0 0] 0.933;//
+
+//Dissolved oxygen/carbon ratio in respiration
+//2.67gO2/gC fixed based on stoichiometric relations
+AOCR             	AOCR 		[0 0 0 0 0 0 0] 2.67;//
+
+//mass of DO consumed per unit mass of ammonium nitrogen nitrified
+//4.33gO2/gN fixed based on stoichiometric relations section 5.5.3 Ji Book 
+AONT             	AONT 		[0 0 0 0 0 0 0] 4.33;//
+
+//Half saturation constant of DO required for oxidation of COD gO2/m3
+//KHocod=KHCOD
+//0.5 g DO/m3, (Cerco, 1994) Table 9-16
+KHCOD             	KHCOD 		[0 0 0 0 0 0 0] 0.5;//its located in the denominator so units must be same as for concentration
+
+//Oxidation rate of COD (day^-1)
+//(Cerco, 1994) Table 9-19
+//1-42 day^-1 (Seawater; Almfren and Hagstrom, 1974)
+//35-76 day^-1(Domestic wastewater; Wilmot et al. 1988)
+//43-144 day^-1 (Chesapeake Bay bottom water; Millero 1991)
+KCOD             	KCOD 		[0 0 -1 0 0 0 0] 1.0e-12;//4.05093e-04;//35/(24*60*60)
+
+//------------------------------------------------------------
+
+Kr			Kr		[0 0 -1 0 0 0 0] 4.166667e-05;//3.6 day^-1
+DOs			DOs		[0 0 0 0 0 0 0] 10;//10
+//------------------------------------------------------------
+k1			k1		[0 0 1 0 0 0 0] 1;//?? what is this for??
+//--------------------------------------------------------------
+
+//Nitrification half saturation constant for dissolved oxygen (gO2/m3)
+//KHont=KHNitDO
+//1 (For groth of nitrosomonas;Helder and DeVries 1983)
+//0.6-3 (Review by Sharma and Ahlert, 1977)
+//1.0 (Cerco, 1994)
+KHNitDO			KHNitDO		[0 0 0 0 0 0 0] 1.0;//min=1 - max=0.0   		//OK UNITS 
+
+//NItrification half saturation constant for ammonimum (gN/m3)
+//0.78 (For growth of nitrosomonas; Helder and Devries 1983)
+//1.6 (Charley et al., 1980)
+//1.3-2.6 (Stratton and McCarty, 1967)
+//0.06-3.5 (Review by Sharma and Ahlert, 1977)
+//1.0 (Cerco, 1994)
+KHNitN			KHNitN		[0 0 0 0 0 0 0] 1.0;//min=1 - max=0.0   		//OK UNITS 
+
+//Maximum nitrification rate at TNit (day^-1)
+//0.006-0.446 (Chesapeake Bay; Horrigan et al. 1990)
+//0.018 (Enriched microcosm, Narragansett Bay; Berounsky and Nixon, 1985)
+//0.027 (James River; Kator, 1990)
+//0.043 (Tamar Estuary; Owens, 1986)
+//0.004-0.11 (Delaware Estuary; Lipschultz et al. 1986)
+//0.07 (Cerco, 1994)
+Nitm			Nitm		[0 0 -1 0 0 0 0] 3.12500e-07;//min=1 - max=0.0   		//OK UNITS //0.027/(24*60*60)
+
+//Effect of temperature below TNit on nitrification rate (oC^-2)
+//KNit1=KTnt
+//0.006 (For growth of nitrosomonas; Helder and Devries 1983)
+//0.0045 (Cerco, 1994)
+KNit1			KNit1		[0 0 0 0 0 0 0] 0.05;//min=0.05 - max=0.0   		//OK UNITS 
+
+//optimum temperature for nitrification
+TNit			TNit		[0 0 0 0 0 0 0] 20.0;//min=20 - max=0.0   		//OK UNITS but later may have units of temperature C. Ojo  K as default in OpenFOAM
+
+//Fraction of predated carbon produced as labile particulate organic carbon
+//0.55, (Cerco, 1994) Table 9-13 FCLP=FCP
+//min=? - max=?   		
+FCP			FCP		[0 0 0 0 0 0 0] 0.55;
+//PRx see line 104 
+
+//hydrolysis rate of labile particulate organic carbon (day^-1)
+//not used it is calculated as function of other parameters see code or thesis
+//min=? - max=? 
+KPOC			KPOC		[0 0 -1 0 0 0 0] 1.15741e-06;//0.1/(24*60*60)  	
+//Minimim diddolution rate of labile particulate organic carbon (day^-1)
+//0.075 day^-21, (Cerco, 1994) Table 9-16
+//min=? - max=?
+KC			KC		[0 0 -1 0 0 0 0] 8.68056e-07;//0.075/(24*60*60)
+
+//Constant that relates dissolution of labile particulate organic carbon, 
+//to algal biomass (day^-1/g-C/m3)(day^-1/comncentration)
+//0.0 , (Cerco, 1994) Table 9-16, KCalg=KLCalg=Klcalg
+//min=? - max=?
+KCalg			KCalg		[0 0 -1 0 0 0 0] 0.0;//jo has to be in 1/seconds   	
+
+//Effect of temperature on hydrolysis of particulate organic matter (oC^-1)
+//0.069, (Cerco, 1994) Table 9-16, 
+//min=? - max=? 
+KTHDR			KTHDR		[0 0 0 0 0 0 0] 0.069;  	
+
+//Reference temperature for hydrolysis of particulate organic matter (oC)
+//20, (Cerco, 1994) Table 9-16, 
+//min=? - max=?
+TRHDR			TRHDR		[0 0 0 0 0 0 0] 20.0;   	
+
+
+//Fraction of metabolized phosphorus by algal group x produced as LPOP (1)
+//0.0, (Cerco, 1994) Table 9-15, 
+FPx			FPx		[0 0 0 0 0 0 0] 0.5;//min=? - max=?   	
+
+
+		
+//APC			APC		[0 0 0 0 0 0 0] 1.0;//min=? - max=?   	
+
+KPOP			KPOP		[0 0 -1 0 0 0 0] 0.1;//min=? - max=?   	//not used in the model for now
+
+
+//Fraction of metabolized nitrogen by algae group x
+//0 , (Cerco, 1994) table 9-15
+//FNX=FNLx
+FNx			FNx		[0 0 0 0 0 0 0] 0.6;//min=? - max=?   			
+//Fraction of predated nitrogen produced as
+//labile partiuclate organic nitrogen
+//FNP=FNLP
+//0.55, (Cerco, 1994) table 9-15
+//min=0 - max=1
+FNP			FNP		[0 0 0 0 0 0 0] 0.55;
+
+//Minimum hydrolysis rate of labile particulate organic nitrogen
+//KN=Kln=Krn
+//Kln=0.075 day-1
+//Krn=0.005 day-1 (Cerco, 1994) Table 9-16
+KN			KN		[0 0 -1 0 0 0 0] 4.62963e-07;//min=? - max=? 0.04/(24*60*60)
+
+//Minimum mineralization rate of dissolved organic nitrogen (day^-1)
+//0.015 day-1 Cerco, 1994 Table
+KDN			KDN	[0 0 -1 0 0 0 0] 1.7361e-7;//min=? - max=? 0.015/(24*60*60)
+//   	
+KPON			KPON		[0 0 -1 0 0 0 0] 0.1;//min=? - max=?   	//not used in pisoSpeciesFoam18
+
+//Mean half-saturation constant for algal nitrogen uptake (g N/m3) 	
+//page 4-39 Cerco, 1994 KHN=KHn=(KHnc+KHnd+KHng)/3
+//Following values from table (Cerco, 1994) Table 9-9
+//KHnc 0.16-0.22 (Collins and Wlosinski 1983)
+//KHnd 0.003-0.186 ??
+//KHNg 0.006-0.589 ??
+//KHNg 0.001-0.008 NH4 uptake in Chesapeake bay (Wheeler et al. 1982)
+//KHnx 0.01 fixed value all groups in Cerco, 1994 Table 9-9
+KHN			KHN		[0 0 0 0 0 0 0] 0.01;//min=? - max=?   	
+
+//cosntant that relates hydrolysis of refractory or labile particulate organic nitrogen (day-1/gC/m3)
+//KNalg=KRNalg ~ KLNalg
+//0 (Cerco, 1994) Table 9-16
+KNalg			KNalg		[0 0 -1 0 0 0 0] 0;//min=? - max=?   	
+
+// ************************************************************************* //
